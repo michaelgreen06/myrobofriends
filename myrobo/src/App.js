@@ -1,13 +1,24 @@
+import { React, useEffect, useState } from "react";
 import "./App.css";
 import Cardlist from "./components/Cardlist";
+import Scroll from "./components/Scroll";
 import SearchBox from "./components/SearchBox";
 import { robots } from "./robots";
 
 function App() {
+  const [search, setSearch] = useState("");
+  // const [robots, setRobots] = useState();
+  const filteredRobots = (e) => {
+    const text = e.target.value;
+    setSearch(text);
+    console.log(text);
+  };
   return (
     <div className="tc">
-      <SearchBox />
-      <Cardlist robots={robots} />
+      <SearchBox searchChange={filteredRobots} />
+      <Scroll>
+        <Cardlist robots={robots} />
+      </Scroll>
     </div>
   );
 }
@@ -23,3 +34,4 @@ export default App;
 //add searchChange to SearchBox componenent.
 //change robots to be fetched from api
 //convert app to use hooks
+//9/7 started at 0844
