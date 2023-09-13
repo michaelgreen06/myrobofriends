@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardList from "./Components/CardList";
 import "./App.css";
-// import { robots } from "./robots.js";
 import SearchBox from "./Components/SearchBox";
 import Scroll from "./Components/Scroll";
 
@@ -17,12 +16,17 @@ function App() {
     const text = e.target.value;
     setSearch(text);
   };
-  const filteredRobots = robots.filter((user) => {
-    return user.name.toLowerCase().inludes(search.toLowerCase());
-  });
+  const filteredRobots = robots.filter(filterFunc);
+  function filterFunc(user) {
+    return user.name.toLowerCase().includes(search.toLowerCase());
+  }
+
   return (
     <div className="tc">
-      <SearchBox searchChagne={handleChange} />
+      <SearchBox
+        searchChange={handleChange}
+        value={search}
+      />
       <Scroll>
         <CardList robots={filteredRobots} />
       </Scroll>
